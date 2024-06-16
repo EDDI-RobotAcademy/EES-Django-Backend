@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from rest_framework import viewsets
 from rest_framework.response import Response
 
+from kakao_oauth.serializer.kakao_oauth_access_token_serializer import KakaoOauthAccessTokenSerializer
 from kakao_oauth.serializer.kakao_oauth_url_serializer import KakaoOauthUrlSerializer
 from kakao_oauth.service.oauth_service_impl import OauthServiceImpl
 
