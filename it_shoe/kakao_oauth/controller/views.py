@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from rest_framework import viewsets
 from rest_framework.response import Response
 
@@ -15,3 +16,15 @@ class OauthView(viewsets.ViewSet):
             serializer.is_valid(raise_exception=True)
             print(f"validated_data: {serializer.validated_data}")
             return Response(serializer.validated_data)
+
+    # def kakaoAccessTokenURI(self, request):
+    #     serializer = KakaoOauthAccessTokenSerializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     code = serializer.validated_data['code']
+    #
+    #     try:
+    #         accessToken = self.oauthService.requestAccessToken(code)
+    #         print(f"accessToken: {accessToken}")
+    #         return JsonResponse({'accessToken': accessToken})
+    #     except Exception as e:
+    #         return JsonResponse({'error': str(e)}, status=500)
