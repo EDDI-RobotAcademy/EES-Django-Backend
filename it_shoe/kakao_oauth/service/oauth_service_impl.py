@@ -14,7 +14,6 @@ class OauthServiceImpl(OauthService):
             cls.__instance.tokenRequestUri = settings.KAKAO['TOKEN_REQUEST_URI']
             cls.__instance.userinfoRequestUri = settings.KAKAO['USERINFO_REQUEST_URI']
 
-
         return cls.__instance
 
     @classmethod
