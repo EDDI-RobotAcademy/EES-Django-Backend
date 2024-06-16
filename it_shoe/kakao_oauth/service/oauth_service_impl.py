@@ -26,5 +26,5 @@ class OauthServiceImpl(OauthService):
 
     def kakaoLoginAddress(self):
         print("kakaoLoginAddress()")
-        return (f"{self.loginUrl}/oauth/authorize?"
+        return (f"{self.loginUrl}/kakao_oauth/authorize?"
                 f"client_id={self.clientId}&redirect_uri={self.redirectUri}&response_type=code")
