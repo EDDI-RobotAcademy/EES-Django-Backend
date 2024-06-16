@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'review',
-    'product'
+    'product',
+    'kakao_oauth',
 ]
 
 MIDDLEWARE = [
