@@ -21,3 +21,7 @@ class ReviewServiceImpl(ReviewService):
 
     def list(self):
         self.__reviewRepository.list()
+
+    def createReview(self, reviewData):
+        self.__reviewRepository.create(reviewData)
+
