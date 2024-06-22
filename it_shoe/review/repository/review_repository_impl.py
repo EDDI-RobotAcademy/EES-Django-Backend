@@ -20,3 +20,9 @@ class ReviewRepositoryImpl(ReviewRepository):
 
     def list(self):
         return Review.objects.all().order_by('-regDate')
+
+    def create(self, reviewData):
+        review = Review(**reviewData)
+        review.save()
+        return review
+
