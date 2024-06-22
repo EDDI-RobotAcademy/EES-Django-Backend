@@ -6,4 +6,5 @@ urlpatterns = [
     path('review/', include('review.urls')),
     path('product/', include('product.urls')),
     path('kakao_oauth/', include('kakao_oauth.urls')),
+    path('account/', include('account.urls')),
 ]
