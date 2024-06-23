@@ -9,7 +9,7 @@ class Review(models.Model):
     updDate = models.DateTimeField(auto_now=True)
     imageUrl = models.URLField(max_length=200, null=True)  # 이미지 URL 추가
     category = models.CharField(max_length=32, null=True)  # 카테고리 추가
-    rating = models.FloatField(null=True)  # 평점 추가
+    rating = models.DecimalField(max_digits=3, decimal_places=1, default=0)
     reviewCount = models.IntegerField(null=True)  # 리뷰 수 추가
 
     def __str__(self):
