@@ -9,3 +9,7 @@ class ReviewService(ABC):
     @abstractmethod
     def createReview(self, reviewData):
         pass
+
+    @abstractmethod
+    def readReview(self, reviewId):
+        pass

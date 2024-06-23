@@ -22,3 +22,8 @@ class ReviewView(viewsets.ViewSet):
             review = self.reviewService.createReview(serializer.validated_data)
             return Response(ReviewSerializer(review).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def read(self, request, pk=None):
+        review = self.reviewService.readReview(pk)
+        serializer = ReviewSerializer(review)
+        return Response(serializer.data)

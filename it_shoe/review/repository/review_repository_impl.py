@@ -19,10 +19,21 @@ class ReviewRepositoryImpl(ReviewRepository):
         return cls.__instance
 
     def list(self):
-        return Review.objects.all().order_by('-regDate')
+        print(f"list() -> Review", Review)
+        print(f"list() -> Review.objects", Review.objects)
+        print(f"list() -> Review.objects.all()", Review.objects.all())
+
+        reviewList = Review.objects.all()
+        for review in reviewList:
+            print(f"Review: {review}")
+
+        return Review.objects.all().order_by('regDate')
 
     def create(self, reviewData):
         review = Review(**reviewData)
         review.save()
         return review
+
+    def findByReviewId(self, reviewId):
+        return Review.objects.get(reviewId=reviewId)
 

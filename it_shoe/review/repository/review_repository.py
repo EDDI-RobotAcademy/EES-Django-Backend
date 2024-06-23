@@ -9,3 +9,7 @@ class ReviewRepository(ABC):
     @abstractmethod
     def create(self, reviewData):
         pass
+
+    @abstractmethod
+    def findByReviewId(self, reviewId):
+        pass
