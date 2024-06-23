@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'review',
     'product',
     'kakao_oauth',
+    'account',
 ]
 
 MIDDLEWARE = [

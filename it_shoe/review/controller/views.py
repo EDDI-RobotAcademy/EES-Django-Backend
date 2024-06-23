@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.response import Response
 
 from review.entity.models import Review
@@ -13,4 +13,17 @@ class ReviewView(viewsets.ViewSet):
     def list(self, request):
         reviewList = self.reviewService.list()
         serializer = ReviewSerializer(reviewList, many=True)
+        return Response(serializer.data)
+
+    def create(self, request):
+        serializer = ReviewSerializer(data=request.data)
+
+        if serializer.is_valid():
+            review = self.reviewService.createReview(serializer.validated_data)
+            return Response(ReviewSerializer(review).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def read(self, request, pk=None):
+        review = self.reviewService.readReview(pk)
+        serializer = ReviewSerializer(review)
         return Response(serializer.data)

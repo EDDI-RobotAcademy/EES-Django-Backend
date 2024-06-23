@@ -5,3 +5,11 @@ class ReviewService(ABC):
     @abstractmethod
     def list(self):
         pass
+
+    @abstractmethod
+    def createReview(self, reviewData):
+        pass
+
+    @abstractmethod
+    def readReview(self, reviewId):
+        pass
