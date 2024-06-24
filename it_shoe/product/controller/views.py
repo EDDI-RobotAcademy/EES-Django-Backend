@@ -14,3 +14,4 @@ class ProductView(viewsets.ViewSet):
         productList = self.productService.list()
         serializer = ProductSerializer(productList, many=True)
         return Response(serializer.data)
+

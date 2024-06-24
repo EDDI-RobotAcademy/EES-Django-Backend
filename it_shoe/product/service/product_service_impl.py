@@ -21,3 +21,5 @@ class ProductServiceImpl(ProductService):
 
     def list(self):
         return self.__productRepository.list()
+
+

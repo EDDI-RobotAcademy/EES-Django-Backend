@@ -5,3 +5,5 @@ class ProductRepository(ABC):
     @abstractmethod
     def list(self):
         pass
+
+    #

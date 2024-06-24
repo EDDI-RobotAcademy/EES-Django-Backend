@@ -1,3 +1,6 @@
+import os
+
+from it_shoe import settings
 from product.entity.models import Product
 from product.repository.product_repository import ProductRepository
 
@@ -20,3 +23,6 @@ class ProductRepositoryImpl(ProductRepository):
 
     def list(self):
         return Product.objects.all().order_by('registeredDate')
+
+
+
