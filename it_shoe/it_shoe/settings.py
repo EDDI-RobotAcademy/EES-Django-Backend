@@ -25,8 +25,6 @@ SECRET_KEY = "django-insecure-=ryb_3sonr^i+o-irp#n%mbzho!tyh4m1%x@1itqx9^mm$#g5s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -73,10 +71,10 @@ CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
 
 print('CORS_ALLOWED_ORIGINS:', CORS_ALLOWED_ORIGINS)
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8080",
+#     "http://127.0.0.1:8080",
+# ]
 
 # CORS 설정 옵션
 CORS_ALLOW_CREDENTIALS = True
@@ -125,6 +123,10 @@ WSGI_APPLICATION = "it_shoe.wsgi.application"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+
+MY_IP = os.getenv('MY_IP')
+
+ALLOWED_HOSTS = [MY_IP]
 
 DATABASES = {
     'default': {
