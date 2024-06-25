@@ -35,5 +35,8 @@ class ReviewRepositoryImpl(ReviewRepository):
         return review
 
     def findByReviewId(self, reviewId):
-        return Review.objects.get(reviewId=reviewId)
+        try:
+            return Review.objects.get(reviewId=reviewId)
+        except Review.DoesNotExist:
+            return None
 
