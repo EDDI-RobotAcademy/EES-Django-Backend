@@ -35,3 +35,6 @@ class BoardRepositoryImpl(BoardRepository):
         target_board.writer = board.writer
         target_board.content = board.content
         target_board.save()
+
+    def delete_board(self, board_id):
+        Board.objects.get(board_id=board_id).delete()

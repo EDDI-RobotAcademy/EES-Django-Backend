@@ -16,4 +16,9 @@ urlpatterns = [
         BoardView.as_view({"put": "modity_board"}),
         name="board-modify",
     ),
+    path(
+        "delete/<int:pk>",
+        BoardView.as_view({"delete": "remove_board"}),
+        name="board-remove",
+    ),
 ]
