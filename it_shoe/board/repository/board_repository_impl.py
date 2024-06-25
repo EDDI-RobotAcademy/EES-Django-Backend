@@ -25,6 +25,13 @@ class BoardRepositoryImpl(BoardRepository):
 
     def get_board_list(self):
         return Board.objects.all()
-    
+
     def get_board(self, board_id):
         return Board.objects.get(id=board_id)
+
+    def update_board(self, board):
+        target_board = Board.objects.get(board_id=board.board_id)
+        target_board.title = board.title
+        target_board.writer = board.writer
+        target_board.content = board.content
+        target_board.save()

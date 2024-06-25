@@ -25,3 +25,13 @@ class BoardView(viewsets.ViewSet):
         board = self.board_service.get_board(pk)
         serializer = BoardSerializer(board)
         return Response(serializer.data)
+    
+    def modify_board(self, request, pk=None):
+        board = self.board_service.get_board(pk)
+        serializer = BoardSerializer(board, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            updated_board = self.board_service.update_board(pk, serializer.validated_data)
+            return Response(BoardSerializer(updated_board).data)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
