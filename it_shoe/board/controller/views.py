@@ -20,3 +20,8 @@ class BoardView(viewsets.ViewSet):
         board_list = self.board_service.get_boards()
         serializer = BoardSerializer(board_list, many=True)
         return Response(serializer.data)
+    
+    def read(self, request, pk=None):
+        board = self.board_service.get_board(pk)
+        serializer = BoardSerializer(board)
+        return Response(serializer.data)

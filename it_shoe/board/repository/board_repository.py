@@ -9,3 +9,7 @@ class BoardRepository(ABC):
     @abstractmethod
     def get_board_list(self):
         pass
+    
+    @abstractmethod
+    def get_board(self, board_id):
+        pass

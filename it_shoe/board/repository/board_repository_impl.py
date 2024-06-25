@@ -25,3 +25,6 @@ class BoardRepositoryImpl(BoardRepository):
 
     def get_board_list(self):
         return Board.objects.all()
+    
+    def get_board(self, board_id):
+        return Board.objects.get(id=board_id)

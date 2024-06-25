@@ -24,3 +24,6 @@ class BoardServiceImpl(BoardService):
     
     def get_board_list(self):
         return self.board_repository.get_boards()
+    
+    def get_board(self, board_id):
+        return self.board_repository.get_board(board_id)
