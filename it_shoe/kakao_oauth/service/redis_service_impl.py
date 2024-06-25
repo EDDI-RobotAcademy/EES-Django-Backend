@@ -31,3 +31,10 @@ class RedisServiceImpl(RedisService):
         except Exception as e:
             print('Error storing access token in Redis:', e)
             raise e
+
+    def getValueByKey(self, key):
+        try:
+            return self.redis_client.get(key)
+        except Exception as e:
+            print("redis key로 value 찾는 중 에러 발생:", e)
+            raise e
