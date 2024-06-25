@@ -50,17 +50,18 @@ class OauthView(viewsets.ViewSet):
         try:
             email = request.data.get('email')
             print(f"redisAccessToken -> email: {email}")
-
             account = self.accountService.findAccountByEmail(email)
             if not account:
                 return Response({'error': 'Account not found'}, status=status.HTTP_404_NOT_FOUND)
 
             userToken = str(uuid.uuid4())
+            print(f"type of account.id: {type(account.id)}")
             self.redisService.store_access_token(account.id, userToken)
+            # key로 value 찾기 테스트
             accountId = self.redisService.getValueByKey(userToken)
             print(f"accountId: {accountId}")
 
-            return Response(status=status.HTTP_200_OK)
+            return Response({ 'userToken': userToken }, status=status.HTTP_200_OK)
         except Exception as e:
             print('Error storing access token in Redis:', e)
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
