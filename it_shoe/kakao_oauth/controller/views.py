@@ -1,3 +1,5 @@
+import uuid
+
 from django.http import JsonResponse
 from rest_framework import viewsets, status
 from rest_framework.response import Response
@@ -47,16 +49,29 @@ class OauthView(viewsets.ViewSet):
     def redisAccessToken(self, request):
         try:
             email = request.data.get('email')
-            access_token = request.data.get('accessToken')
             print(f"redisAccessToken -> email: {email}")
-
             account = self.accountService.findAccountByEmail(email)
             if not account:
                 return Response({'error': 'Account not found'}, status=status.HTTP_404_NOT_FOUND)
 
-            self.redisService.store_access_token(account.id, access_token)
+            userToken = str(uuid.uuid4())
+            print(f"type of account.id: {type(account.id)}")
+            self.redisService.store_access_token(account.id, userToken)
+            # key로 value 찾기 테스트
+            accountId = self.redisService.getValueByKey(userToken)
+            print(f"accountId: {accountId}")
 
-            return Response(status=status.HTTP_200_OK)
+            return Response({ 'userToken': userToken }, status=status.HTTP_200_OK)
         except Exception as e:
             print('Error storing access token in Redis:', e)
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+    def dropRedisTokenForLogout(self, request):
+        try:
+            userToken = request.data.get('userToken')
+            isSuccess = self.redisService.deleteKey(userToken)
+
+            return Response({'isSuccess': isSuccess}, status=status.HTTP_200_OK)
+        except Exception as e:
+            print('레디스 토큰 해제 중 에러 발생:', e)
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
