@@ -15,3 +15,8 @@ class BoardView(viewsets.ViewSet):
             return Response(BoardSerializer(board).data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def list(self, request):
+        board_list = self.board_service.get_boards()
+        serializer = BoardSerializer(board_list, many=True)
+        return Response(serializer.data)

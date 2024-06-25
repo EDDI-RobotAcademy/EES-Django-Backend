@@ -8,7 +8,7 @@ class BoardServiceImpl(BoardService):
     def __new__(cls):
         if cls.__instance is None:
             cls.__instance = super().__new__(cls)
-            cls.__instance.__boardRepository = BoardRepositoryImpl.get_instance()
+            cls.__instance.__board_repository = BoardRepositoryImpl.get_instance()
 
         return cls.__instance
 
@@ -21,3 +21,6 @@ class BoardServiceImpl(BoardService):
 
     def create_board(self, board):
         return self.board_repository.create_board(board)
+    
+    def get_board_list(self):
+        return self.board_repository.get_boards()

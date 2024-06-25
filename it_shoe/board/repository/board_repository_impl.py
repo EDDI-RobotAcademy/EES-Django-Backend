@@ -22,3 +22,6 @@ class BoardRepositoryImpl(BoardRepository):
         return Board.objects.create(
             title=board.title, writer=board.writer, content=board.content
         )
+
+    def get_board_list(self):
+        return Board.objects.all()
