@@ -122,7 +122,6 @@ WSGI_APPLICATION = "it_shoe.wsgi.application"
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
-
 MY_IP = os.getenv('MY_IP')
 
 ALLOWED_HOSTS = [MY_IP]
