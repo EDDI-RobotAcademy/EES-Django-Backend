@@ -22,8 +22,9 @@ class ReviewServiceImpl(ReviewService):
     def list(self):
         return self.__reviewRepository.list()
 
-    def createReview(self, reviewData):
-        self.__reviewRepository.create(reviewData)
+    def createReview(self, title, writer, content, rating, reviewImage):
+        return self.__reviewRepository.create(title, writer, content, rating, reviewImage)
+
 
     def readReview(self, reviewId):
         return self.__reviewRepository.findByReviewId(reviewId)

@@ -15,13 +15,29 @@ class ReviewView(viewsets.ViewSet):
         serializer = ReviewSerializer(reviewList, many=True)
         return Response(serializer.data)
 
-    def create(self, request):
-        serializer = ReviewSerializer(data=request.data)
+    def register(self, request):
+        try:
+            data = request.data
 
-        if serializer.is_valid():
-            review = self.reviewService.createReview(serializer.validated_data)
-            return Response(ReviewSerializer(review).data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            reviewImage = request.FILES.get('reviewImage')
+            title = data.get('title')
+            writer = data.get('writer')
+            content = data.get('content')
+            rating = data.get('rating')
+
+            if not all([reviewImage, title, writer, rating, content]):
+                return Response({ 'error': '모든 내용을 채워주세요!' },
+                                status=status.HTTP_400_BAD_REQUEST)
+
+            self.reviewService.createReview(title, writer,
+                                              content, rating, reviewImage)
+
+            serializer = ReviewSerializer(data=request.data)
+            return Response(status=status.HTTP_200_OK)
+
+        except Exception as e:
+            print('리뷰 등록 과정 중 문제 발생:', e)
+            return Response({ 'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
     def read(self, request, pk=None):
         review = self.reviewService.readReview(pk)
