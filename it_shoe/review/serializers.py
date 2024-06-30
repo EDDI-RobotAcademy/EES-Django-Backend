@@ -7,5 +7,5 @@ from review.entity.models import Review
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ['reviewId', 'title', 'writer', 'content','rating', 'regDate', 'updDate']
+        fields = ['reviewId', 'title', 'writer', 'content','reviewImage','rating', 'regDate', 'updDate']
         read_only_fields = ['regDate', 'updDate']

@@ -1,3 +1,6 @@
+import os
+
+from it_shoe import settings
 from review.entity.models import Review
 from review.repository.review_repository import ReviewRepository
 
@@ -29,8 +32,29 @@ class ReviewRepositoryImpl(ReviewRepository):
 
         return Review.objects.all().order_by('regDate')
 
-    def create(self, reviewData):
-        review = Review(**reviewData)
+    def create(self, title, writer, content, rating, reviewImage):
+        uploadDirectory = os.path.join(
+            settings.BASE_DIR,
+            '../../../../proj/EES-Vue-Frontend/src/assets/images/reviewImages'
+        )
+        if not os.path.exists(uploadDirectory):
+            os.makedirs(uploadDirectory)
+
+        imagePath = os.path.join(uploadDirectory, reviewImage.name)
+        with open(imagePath, 'wb+') as destination:
+            for chunk in reviewImage.chunks():
+                destination.write(chunk)
+
+            destination.flush()
+            os.fsync(destination.fileno())
+
+        review = Review(
+            title=title,
+            writer=writer,
+            content=content,
+            rating=rating,
+            reviewImage=reviewImage.name
+        )
         review.save()
         return review
 

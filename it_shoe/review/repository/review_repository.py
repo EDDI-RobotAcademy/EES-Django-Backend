@@ -7,7 +7,7 @@ class ReviewRepository(ABC):
         pass
 
     @abstractmethod
-    def create(self, reviewData):
+    def create(self, title, writer, content, rating, reviewImage):
         pass
 
     @abstractmethod
