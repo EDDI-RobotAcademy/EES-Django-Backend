@@ -1,6 +1,4 @@
 import os
-
-from it_shoe import settings
 from review.entity.models import Review
 from review.repository.review_repository import ReviewRepository
 
@@ -22,19 +20,11 @@ class ReviewRepositoryImpl(ReviewRepository):
         return cls.__instance
 
     def list(self):
-        print(f"list() -> Review", Review)
-        print(f"list() -> Review.objects", Review.objects)
-        print(f"list() -> Review.objects.all()", Review.objects.all())
-
-        reviewList = Review.objects.all()
-        for review in reviewList:
-            print(f"Review: {review}")
-
         return Review.objects.all().order_by('regDate')
 
     def create(self, title, writer, content, rating, reviewImage):
         uploadDirectory = os.path.join(
-            settings.BASE_DIR,
+            os.path.abspath(os.path.dirname(__file__)),
             '../../../../proj/EES-Vue-Frontend/src/assets/images/reviewImages'
         )
         if not os.path.exists(uploadDirectory):
@@ -44,9 +34,6 @@ class ReviewRepositoryImpl(ReviewRepository):
         with open(imagePath, 'wb+') as destination:
             for chunk in reviewImage.chunks():
                 destination.write(chunk)
-
-            destination.flush()
-            os.fsync(destination.fileno())
 
         review = Review(
             title=title,
@@ -63,4 +50,3 @@ class ReviewRepositoryImpl(ReviewRepository):
             return Review.objects.get(reviewId=reviewId)
         except Review.DoesNotExist:
             return None
-
