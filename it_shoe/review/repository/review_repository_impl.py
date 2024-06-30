@@ -23,9 +23,8 @@ class ReviewRepositoryImpl(ReviewRepository):
         return Review.objects.all().order_by('regDate')
 
     def create(self, title, writer, content, rating, reviewImage):
-        uploadDirectory = os.path.join(
-            os.path.abspath(os.path.dirname(__file__)),
-            '../../../../proj/EES-Vue-Frontend/src/assets/images/reviewImages'
+        uploadDirectory = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), '../../../../EES-Vue-Frontend/src/assets/images/reviewImages')
         )
         if not os.path.exists(uploadDirectory):
             os.makedirs(uploadDirectory)
