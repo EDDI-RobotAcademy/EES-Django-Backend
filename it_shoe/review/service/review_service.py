@@ -7,7 +7,7 @@ class ReviewService(ABC):
         pass
 
     @abstractmethod
-    def createReview(self, reviewData):
+    def createReview(self, title, writer, content, rating, reviewImage):
         pass
 
     @abstractmethod
