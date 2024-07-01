@@ -13,4 +13,3 @@ class ProductService(ABC):
     @abstractmethod
     def readProduct(self, productId):
         pass
-

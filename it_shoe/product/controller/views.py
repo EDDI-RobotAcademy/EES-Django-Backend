@@ -6,6 +6,10 @@ from product.entity.models import Product
 from product.serializers import ProductSerializer
 from product.service.product_service_impl import ProductServiceImpl
 
+
+# Create your views here.
+# viewsets를 사용하려면 rest_framework가 설정되어야 합니다.
+# pip install djangorestframework
 class ProductView(viewsets.ViewSet):
     queryset = Product.objects.all()
     productService = ProductServiceImpl.getInstance()
@@ -28,11 +32,12 @@ class ProductView(viewsets.ViewSet):
                 return Response({ 'error': '모든 내용을 채워주세요!' },
                                 status=status.HTTP_400_BAD_REQUEST)
 
-            self.productService.createProduct(productName, productPrice,
+            savedProduct = self.productService.createProduct(productName, productPrice,
                                               productDescription, productImage)
 
-            serializer = ProductSerializer(data=request.data)
-            return Response(status=status.HTTP_200_OK)
+            serializer = ProductSerializer(savedProduct)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
         except Exception as e:
             print('상품 등록 과정 중 문제 발생:', e)
