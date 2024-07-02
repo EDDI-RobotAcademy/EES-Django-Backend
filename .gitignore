@@ -13,6 +13,7 @@ media
 .idea/
 it_shoe/db.sqlite3
 it_shoe/__pycache__/
+*/migrations/
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
