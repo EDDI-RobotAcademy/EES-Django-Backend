@@ -60,10 +60,16 @@ class AccountView(viewsets.ViewSet):
         userToken = request.data.get('userToken')
         if not userToken:
             return Response(None, status=status.HTTP_200_OK)
-        # print(f"userToken: {userToken}")
         accountId = self.redisService.getValueByKey(userToken)
-        # print(f"accountId: {accountId}")
         profile = self.profileRepository.findById(accountId)
-        # print(f"profile: {profile}")
         nickname = profile.nickname
         return Response(nickname, status=status.HTTP_200_OK)
+
+    def getEmail(self, request):
+        userToken = request.data.get('userToken')
+        if not userToken:
+            return Response(None, status=status.HTTP_200_OK)
+        accountId = self.redisService.getValueByKey(userToken)
+        profile = self.profileRepository.findById(accountId)
+        email = profile.email
+        return Response(email, status=status.HTTP_200_OK)
