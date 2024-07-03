@@ -6,10 +6,6 @@ from community.entity.models import Community
 from community.serializers import CommunitySerializer
 from community.service.community_service_impl import CommunityServiceImpl
 
-
-# Create your views here.
-# viewsets를 사용하려면 rest_framework가 설정되어야 합니다.
-# pip install djangorestframework
 class CommunityView(viewsets.ViewSet):
     queryset = Community.objects.all()
     communityService = CommunityServiceImpl.getInstance()
