@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'review',
     'product',
+    'cart',
     'kakao_oauth',
     'account',
-    'board',
+    'community',
 ]
 
 MIDDLEWARE = [

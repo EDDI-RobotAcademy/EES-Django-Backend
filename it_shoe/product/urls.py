@@ -13,4 +13,4 @@ urlpatterns = [
     path('read/<int:pk>', ProductView.as_view({'get': 'readProduct'}), name='product-read'),
 ]
 
-# localhost:8000/board/list
+# localhost:8000/community/list
