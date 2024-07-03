@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'product',
     'kakao_oauth',
     'account',
-    'board',
+    'community',
 ]
 
 MIDDLEWARE = [

@@ -7,5 +7,5 @@ urlpatterns = [
     path('product/', include('product.urls')),
     path('kakao_oauth/', include('kakao_oauth.urls')),
     path('account/', include('account.urls')),
-    path('board/', include('board.urls')),
+    path('community/', include('community.urls')),
 ]
