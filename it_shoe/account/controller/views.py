@@ -1,12 +1,15 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 
+from account.repository.profile_repository_impl import ProfileRepositoryImpl
 from account.serializers import AccountSerializer
 from account.service.account_service_impl import AccountServiceImpl
-
+from kakao_oauth.service.redis_service_impl import RedisServiceImpl
 
 class AccountView(viewsets.ViewSet):
     accountService = AccountServiceImpl.getInstance()
+    profileRepository = ProfileRepositoryImpl.getInstance()
+    redisService = RedisServiceImpl.getInstance()
 
     def checkEmailDuplication(self, request):
         print("checkEmailDuplication()")
@@ -52,3 +55,15 @@ class AccountView(viewsets.ViewSet):
         except Exception as e:
             print("계정 생성 중 에러 발생:", e)
             return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
+    def getNickname(self, request):
+        userToken = request.data.get('userToken')
+        if not userToken:
+            return Response(None, status=status.HTTP_200_OK)
+        # print(f"userToken: {userToken}")
+        accountId = self.redisService.getValueByKey(userToken)
+        # print(f"accountId: {accountId}")
+        profile = self.profileRepository.findById(accountId)
+        # print(f"profile: {profile}")
+        nickname = profile.nickname
+        return Response(nickname, status=status.HTTP_200_OK)
