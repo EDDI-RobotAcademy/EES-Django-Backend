@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'kakao_oauth',
     'account',
     'community',
+    'viewCount',
 ]
 
 MIDDLEWARE = [

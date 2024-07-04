@@ -9,4 +9,5 @@ urlpatterns = [
     path('kakao_oauth/', include('kakao_oauth.urls')),
     path('account/', include('account.urls')),
     path('community/', include('community.urls')),
+    path("view-count/", include('viewCount.urls')),
 ]

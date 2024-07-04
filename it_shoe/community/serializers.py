@@ -1,11 +1,17 @@
 from rest_framework import serializers
-
 from community.entity.models import Community
+from viewCount.entity.community_viewcount import CommunityViewCount
 
-
-# 실제 사용할 데이터의 형식이 무엇인지를 알려줍니다
 class CommunitySerializer(serializers.ModelSerializer):
+    viewCount = serializers.SerializerMethodField()
+
     class Meta:
         model = Community
-        fields = ['communityId', 'title', 'writer', 'content', 'regDate', 'updDate']
-        read_only_fields = ['regDate', 'updDate']
+        fields = ['communityId', 'title', 'writer', 'content', 'regDate', 'updDate', 'viewCount']
+        read_only_fields = ['regDate', 'updDate', 'viewCount']
+
+    def get_viewCount(self, obj):
+        try:
+            return obj.view_count.count
+        except CommunityViewCount.DoesNotExist:
+            return 0
