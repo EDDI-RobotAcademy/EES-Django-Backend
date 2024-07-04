@@ -3,7 +3,7 @@ from viewCount.entity.community_viewcount import CommunityViewCount
 from .viewcount_repository import ViewCountRepository
 
 class ViewCountRepositoryImpl(ViewCountRepository):
-    def increment_view_count(self, community_id):
+    def increment_community_view_count(self, community_id):
         try:
             community = Community.objects.get(pk=community_id)
             view_count, created = CommunityViewCount.objects.get_or_create(community=community)
