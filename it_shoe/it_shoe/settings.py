@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'review',
     'product',
     'cart',
+    'orders',
     'kakao_oauth',
     'account',
     'community',
