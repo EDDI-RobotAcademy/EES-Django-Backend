@@ -5,6 +5,9 @@ from rest_framework.response import Response
 from community.entity.models import Community
 from community.serializers import CommunitySerializer
 from community.service.community_service_impl import CommunityServiceImpl
+from viewCount.service.viewcount_service_impl import ViewCountServiceImpl
+
+view_count_service = ViewCountServiceImpl()
 
 class CommunityView(viewsets.ViewSet):
     queryset = Community.objects.all()
@@ -28,8 +31,12 @@ class CommunityView(viewsets.ViewSet):
 
     def read(self, request, pk=None):
         community = self.communityService.readCommunity(pk)
-        serializer = CommunitySerializer(community)
-        return Response(serializer.data)
+        if community:
+            # viewCount 증가 로직 추가
+            view_count_service.increment_view_count(pk)
+            serializer = CommunitySerializer(community)
+            return Response(serializer.data)
+        return Response({'status': 'error', 'message': 'Community not found'}, status=status.HTTP_404_NOT_FOUND)
 
     def removeCommunity(self, request, pk=None):
         self.communityService.removeCommunity(pk)
