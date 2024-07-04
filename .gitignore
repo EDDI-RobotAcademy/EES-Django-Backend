@@ -13,7 +13,7 @@ media
 .idea/
 it_shoe/db.sqlite3
 it_shoe/__pycache__/
-*/migrations/
+**/migrations/*
 ! */migrations/__init__.py
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
