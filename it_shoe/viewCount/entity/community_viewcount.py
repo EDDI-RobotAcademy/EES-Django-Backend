@@ -8,3 +8,6 @@ class CommunityViewCount(models.Model):
     def increment(self):
         self.count += 1
         self.save()
+
+    class Meta:
+        db_table = 'community_viewcount'
