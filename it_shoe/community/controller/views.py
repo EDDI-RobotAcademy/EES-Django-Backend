@@ -33,7 +33,7 @@ class CommunityView(viewsets.ViewSet):
         community = self.communityService.readCommunity(pk)
         if community:
             # viewCount 증가 로직 추가
-            view_count_service.increment_view_count(pk)
+            view_count_service.increment_community_view_count(pk)
             serializer = CommunitySerializer(community)
             return Response(serializer.data)
         return Response({'status': 'error', 'message': 'Community not found'}, status=status.HTTP_404_NOT_FOUND)

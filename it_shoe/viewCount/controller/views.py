@@ -7,7 +7,7 @@ view_count_service = ViewCountServiceImpl()
 class ViewCountView(viewsets.ViewSet):
 
     def increment(self, request, pk=None):
-        new_view_count = view_count_service.increment_view_count(pk)
+        new_view_count = view_count_service.increment_community_view_count(pk)
         if new_view_count is not None:
             return Response({'status': 'success', 'viewCount': new_view_count})
         else:
