@@ -11,14 +11,6 @@ urlpatterns = [
     path("register", CommunityView.as_view({"post": "create"}), name="community-register"),
     path("list/", CommunityView.as_view({"get": "list"}), name="community-list"),
     path("read/<int:pk>", CommunityView.as_view({"get": "read"}), name="community-read"),
-    path(
-        "modify/<int:pk>",
-        CommunityView.as_view({"put": "modify_community"}),
-        name="community-modify",
-    ),
-    path(
-        "delete/<int:pk>",
-        CommunityView.as_view({"delete": "remove_community"}),
-        name="community-remove",
-    ),
+    path("modify/<int:pk>", CommunityView.as_view({"put": "modifyCommunity"}), name="community-modify"),
+    path("delete/<int:pk>", CommunityView.as_view({"delete": "removeCommunity"}), name="community-remove"),
 ]
