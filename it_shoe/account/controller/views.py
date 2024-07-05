@@ -42,12 +42,16 @@ class AccountView(viewsets.ViewSet):
         try:
             nickname = request.data.get('nickname')
             email = request.data.get('email')
+            gender = request.data.get('gender')          # 성별 추가
+            birthyear = request.data.get('birthyear')    # 생년월일 추가
 
             account = self.accountService.registerAccount(
                 loginType='KAKAO',
                 roleType='NORMAL',
                 nickname=nickname,
                 email=email,
+                gender=gender,
+                birthyear=birthyear,
             )
 
             serializer = AccountSerializer(account)
