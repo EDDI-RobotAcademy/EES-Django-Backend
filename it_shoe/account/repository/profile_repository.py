@@ -17,3 +17,7 @@ class ProfileRepository(ABC):
     @abstractmethod
     def findById(self, accountId):
         pass
+
+    @abstractmethod
+    def updateLastLogin(self, profile):
+        pass
