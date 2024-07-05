@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from review.entity.models import Review
 from review.serializers import ReviewSerializer
 from review.service.review_service_impl import ReviewServiceImpl
+from viewCount.controller.views import view_count_service
 
 
 class ReviewView(viewsets.ViewSet):
@@ -38,6 +39,7 @@ class ReviewView(viewsets.ViewSet):
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
     def read(self, request, pk=None):
+        view_count_service.increment_review_view_count(pk)
         review = self.reviewService.readReview(pk)
         serializer = ReviewSerializer(review)
         return Response(serializer.data)
