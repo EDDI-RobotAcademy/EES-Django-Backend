@@ -1,7 +1,7 @@
 from account.repository.account_repository_impl import AccountRepositoryImpl
 from account.repository.profile_repository_impl import ProfileRepositoryImpl
 from account.service.account_service import AccountService
-from django.contrib.auth.hashers import make_password
+
 
 
 class AccountServiceImpl(AccountService):
@@ -34,5 +34,10 @@ class AccountServiceImpl(AccountService):
         account = self.__accountRepository.create(loginType, roleType)
         return self.__profileRepository.create(nickname, email, gender, birthyear, account)
 
+    # def findAccountByEmail(self, email):
+    #     return self.__profileRepository.findByEmail(email)
     def findAccountByEmail(self, email):
-        return self.__profileRepository.findByEmail(email)
+        profile = self.__profileRepository.findByEmail(email)
+        if profile:
+            self.__profileRepository.updateLastLogin(profile)
+        return profile
