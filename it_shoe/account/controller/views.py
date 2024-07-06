@@ -100,3 +100,15 @@ class AccountView(viewsets.ViewSet):
         email = profile.email
         return Response(email, status=status.HTTP_200_OK)
 
+    def withdrawAccount(self, request):
+        try:
+            reason = request.data.get('reason')
+            print(f"탈퇴 사유: {reason}")
+
+            # self.accountService.withdrawAccount(
+            #     roleType='BLACKLIST'
+            # )
+            return Response(reason, status=status.HTTP_200_OK)
+        except Exception as e:
+            print("회원 탈퇴 중 에러 발생:", e)
+            return Response(reason, status=status.HTTP_400_BAD_REQUEST)
