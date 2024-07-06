@@ -94,7 +94,7 @@ class AccountView(viewsets.ViewSet):
         except Exception as e:
             print("회원 탈퇴 중 에러 발생:", e)
             return Response(reason, status=status.HTTP_400_BAD_REQUEST)
-        
+
     def getGender(self, request):
         userToken = request.data.get('userToken')
         if not userToken:
@@ -105,3 +105,14 @@ class AccountView(viewsets.ViewSet):
             return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)  # 에러 처리 추가
         gender = profile.gender
         return Response(gender, status=status.HTTP_200_OK)
+
+    def getBirthyear(self, request):
+        userToken = request.data.get('userToken')
+        if not userToken:
+            return Response(None, status=status.HTTP_200_OK)
+        accountId = self.redisService.getValueByKey(userToken)
+        profile = self.profileRepository.findById(accountId)
+        if profile is None:
+            return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)  # 에러 처리 추가
+        birthyear = profile.birthyear
+        return Response(birthyear, status=status.HTTP_200_OK)
