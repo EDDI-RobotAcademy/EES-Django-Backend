@@ -11,3 +11,4 @@ class ProductViewCount(models.Model):
 
     class Meta:
         db_table = 'product_viewcount'
+        app_label = 'viewCount'

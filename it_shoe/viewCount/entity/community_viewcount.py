@@ -11,3 +11,4 @@ class CommunityViewCount(models.Model):
 
     class Meta:
         db_table = 'community_viewcount'
+        app_label = 'viewCount'
