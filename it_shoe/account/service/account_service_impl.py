@@ -41,3 +41,6 @@ class AccountServiceImpl(AccountService):
         if profile:
             self.__profileRepository.updateLastLogin(profile)
         return profile
+
+    def withdrawAccount(self, id):
+        pass

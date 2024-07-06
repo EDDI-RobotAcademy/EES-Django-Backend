@@ -11,3 +11,4 @@ class ReviewViewCount(models.Model):
 
     class Meta:
         db_table = 'review_viewcount'
+        app_label = 'viewCount'
