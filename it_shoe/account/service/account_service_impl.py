@@ -3,6 +3,7 @@ from account.repository.profile_repository_impl import ProfileRepositoryImpl
 from account.service.account_service import AccountService
 
 
+
 class AccountServiceImpl(AccountService):
     __instance = None
 
@@ -29,9 +30,14 @@ class AccountServiceImpl(AccountService):
         profile = self.__profileRepository.findByNickname(nickname)
         return profile is not None
 
-    def registerAccount(self, loginType, roleType, nickname, email):
+    def registerAccount(self, loginType, roleType, nickname, email, gender, birthyear):
         account = self.__accountRepository.create(loginType, roleType)
-        return self.__profileRepository.create(nickname, email, account)
+        return self.__profileRepository.create(nickname, email, gender, birthyear, account)
 
+    # def findAccountByEmail(self, email):
+    #     return self.__profileRepository.findByEmail(email)
     def findAccountByEmail(self, email):
-        return self.__profileRepository.findByEmail(email)
+        profile = self.__profileRepository.findByEmail(email)
+        if profile:
+            self.__profileRepository.updateLastLogin(profile)
+        return profile

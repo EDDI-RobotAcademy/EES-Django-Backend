@@ -11,9 +11,13 @@ class ProfileRepository(ABC):
         pass
 
     @abstractmethod
-    def create(self, nickname, email, account):
+    def create(self, nickname, email, gender, birthyear, account):
         pass
 
     @abstractmethod
     def findById(self, accountId):
+        pass
+
+    @abstractmethod
+    def updateLastLogin(self, profile):
         pass

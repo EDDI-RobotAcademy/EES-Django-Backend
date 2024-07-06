@@ -1,6 +1,7 @@
 from account.entity.profile import Profile
 from account.repository.profile_repository import ProfileRepository
 
+from django.utils import timezone
 
 class ProfileRepositoryImpl(ProfileRepository):
     __instance = None
@@ -40,8 +41,14 @@ class ProfileRepositoryImpl(ProfileRepository):
             print(f"nickname 중복 검사 중 에러 발생: {nickname}")
             return None
 
-    def create(self, nickname, email, account):
-        profile = Profile.objects.create(nickname=nickname, email=email, account=account)
+    def create(self, nickname, email, gender, birthyear, account):
+        profile = Profile.objects.create(
+            nickname=nickname,
+            email=email,
+            gender=gender,
+            birthyear=birthyear,
+            account=account
+        )
         return profile
 
     def findById(self, accountId):
@@ -53,4 +60,13 @@ class ProfileRepositoryImpl(ProfileRepository):
             return None
         except Exception as e:
             print(f"accountId로 계정 찾는 중 에러 발생: {e}")
+            return None
+
+    # 접속시간 기록을 위한 추가
+    def updateLastLogin(self, profile):
+        try:
+            profile.last_login = timezone.now()
+            profile.save()
+        except Exception as e:
+            print(f"최근 접속시간 업데이트 중 에러 발생: {e}")
             return None

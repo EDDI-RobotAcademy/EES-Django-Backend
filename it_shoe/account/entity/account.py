@@ -17,3 +17,6 @@ class Account(models.Model):
     class Meta:
         db_table = 'account'
         app_label = 'account'
+
+    # def getId(self):
+    #     return self.id
