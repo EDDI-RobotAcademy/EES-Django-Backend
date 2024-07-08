@@ -83,7 +83,7 @@ class ProfileRepositoryImpl(ProfileRepository):
             print(f"로그인 기록 생성 중 에러 발생: {e}")
             return None
         
-    def withdraw_account(self, profile):
+    def withdrawAccount(self, profile):
         account = profile.account
         role_type = AccountRoleType.objects.get(id=account.roleType_id)
         if role_type.roleType == "NORMAL":
@@ -98,3 +98,14 @@ class ProfileRepositoryImpl(ProfileRepository):
             print('계정 탈퇴 완료')
         else:
             raise ValueError('이미 탈퇴된 계정입니다')
+
+    def findByGender(self, id):
+        try:
+            profile = ProfileGenderType.objects.get(id=id)
+            return profile
+        except Profile.DoesNotExist:
+            print('accountId와 일치하는 계정이 없습니다')
+            return None
+        except Exception as e:
+            print(f"accountId로 계정 찾는 중 에러 발생: {e}")
+            return None
