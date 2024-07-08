@@ -21,3 +21,7 @@ class ProfileRepository(ABC):
     @abstractmethod
     def updateLastLogin(self, profile):
         pass
+    
+    @abstractmethod
+    def withdraw_account(self, profile):
+        pass

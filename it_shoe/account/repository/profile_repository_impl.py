@@ -70,3 +70,19 @@ class ProfileRepositoryImpl(ProfileRepository):
         except Exception as e:
             print(f"최근 접속시간 업데이트 중 에러 발생: {e}")
             return None
+        
+    def withdraw_account(self, profile):
+        account = profile.account
+        role_type = AccountRoleType.objects.get(id=account.roleType_id)
+        if role_type.roleType == "NORMAL":
+            role_type.roleType = "BLACKLIST"
+            role_type.save()
+
+            account.roleType = role_type
+            account.save()
+            
+            profile.withdraw_at = timezone.now() + timezone.timedelta(hours=9)
+            profile.save()
+            print('계정 탈퇴 완료')
+        else:
+            raise ValueError('이미 탈퇴된 계정입니다')

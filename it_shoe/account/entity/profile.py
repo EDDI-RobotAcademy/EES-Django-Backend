@@ -11,6 +11,7 @@ class Profile(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)  # 최초 등록일자 필드 추가
     last_login = models.DateTimeField(auto_now=True)      # 최근 접속시간 필드 추가
+    withdraw_at = models.DateTimeField(null=True)         
 
     def save(self, *args, **kwargs):
         if not self.pk:  # 객체가 처음 생성될 때
