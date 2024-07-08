@@ -73,6 +73,7 @@ class CartServiceImpl(CartService):
                 'productPrice': cartItem.product.productPrice,
                 'productId': cartItem.product.productId,
                 'quantity': cartItem.quantity,
+                'productSize': cartItem.productSize,
             }
             cartItemListResponseForm.append(cartItemResponseForm)
 

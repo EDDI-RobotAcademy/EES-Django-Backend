@@ -1,4 +1,3 @@
-from account.repository.account_repository_impl import AccountRepositoryImpl
 from cart.repository.cart_item_repository_impl import CartItemRepositoryImpl
 from orders.entity.orders_status import OrderStatus
 from orders.repository.orders_item_repository_impl import OrdersItemRepositoryImpl
@@ -18,7 +17,6 @@ class OrdersServiceImpl(OrdersService):
             cls.__instance.__ordersItemRepository = OrdersItemRepositoryImpl.getInstance()
             cls.__instance.__cartItemRepository = CartItemRepositoryImpl.getInstance()
             cls.__instance.__productRepository = ProductRepositoryImpl.getInstance()
-            cls.__instance.__accountRepository = AccountRepositoryImpl.getInstance()
 
         return cls.__instance
 

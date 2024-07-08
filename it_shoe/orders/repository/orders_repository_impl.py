@@ -1,5 +1,3 @@
-from django.core.paginator import Paginator
-
 from orders.entity.orders import Orders
 from orders.repository.orders_repository import OrdersRepository
 
