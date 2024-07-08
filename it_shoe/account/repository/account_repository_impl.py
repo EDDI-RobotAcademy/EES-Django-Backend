@@ -1,6 +1,7 @@
 from account.entity.account import Account
 from account.entity.account_login_type import AccountLoginType
 from account.entity.account_role_type import AccountRoleType
+from account.entity.login_history import LoginHistory
 from account.repository.account_repository import AccountRepository
 
 from django.utils import timezone
@@ -22,8 +23,8 @@ class AccountRepositoryImpl(AccountRepository):
         return cls.__instance
 
     def create(self, loginType, roleType):
-        loginTypeEntity, _ = AccountLoginType.objects.get_or_create(loginType=loginType)
-        roleTypeEntity, _ = AccountRoleType.objects.get_or_create(roleType=roleType)
+        loginTypeEntity = AccountLoginType.objects.create(loginType=loginType)
+        roleTypeEntity = AccountRoleType.objects.create(roleType=roleType)
 
         account = Account.objects.create(loginType=loginTypeEntity, roleType=roleTypeEntity)
         return account
@@ -35,7 +36,7 @@ class AccountRepositoryImpl(AccountRepository):
     # 접속시간 기록을 위한 추가
     def updateLastLogin(self, profile):
         try:
-            profile.last_login = timezone.now()
+            profile.last_login = timezone.now() + timezone.timedelta(hours=9)
             profile.save()
         except Exception as e:
             print(f"최근 접속시간 업데이트 중 에러 발생: {e}")
