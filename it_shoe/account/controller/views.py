@@ -81,20 +81,24 @@ class AccountView(viewsets.ViewSet):
             return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)  # 에러 처리 추가
         email = profile.email
         return Response(email, status=status.HTTP_200_OK)
-
-    def withdrawAccount(self, request):
+    
+    def withdraw_account(self, request):
         try:
             reason = request.data.get('reason')
-            print(f"탈퇴 사유: {reason}")
-
-            # self.accountService.withdrawAccount(
-            #     roleType='BLACKLIST'
-            # )
-            return Response(reason, status=status.HTTP_200_OK)
+            userToken = request.data.get('userToken')
+            if not userToken:
+                return Response(None, status=status.HTTP_200_OK)
+            accountId = self.redisService.getValueByKey(userToken)
+            profile = self.profileRepository.findById(accountId)
+            if profile is None:
+                return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
+            email = profile.email
+            res = self.accountService.withdraw_account(email)
+            return Response(res, status=status.HTTP_200_OK)
         except Exception as e:
             print("회원 탈퇴 중 에러 발생:", e)
-            return Response(reason, status=status.HTTP_400_BAD_REQUEST)
-
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
     def getGender(self, request):
         userToken = request.data.get('userToken')
         if not userToken:

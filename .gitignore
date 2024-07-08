@@ -385,3 +385,10 @@ $RECYCLE.BIN/
 # exclude .idea
 .idea
 *.idea
+
+img_*.png
+*.ipynb
+*.sh
+*.pt
+*.csv
+scripts/
