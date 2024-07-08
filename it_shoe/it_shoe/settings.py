@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'account',
     'community',
     'viewCount',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
