@@ -21,11 +21,15 @@ class ProfileRepository(ABC):
     @abstractmethod
     def updateLastLogin(self, profile):
         pass
-    
+
     @abstractmethod
     def update_login_history(self, profile):
         pass
-    
+
+    @abstractmethod
+    def findByGender(self, id):
+        pass
+
     @abstractmethod
     def withdrawAccount(self, profile):
         pass
