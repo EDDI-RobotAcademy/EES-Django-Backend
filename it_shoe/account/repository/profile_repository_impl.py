@@ -70,3 +70,10 @@ class ProfileRepositoryImpl(ProfileRepository):
         except Exception as e:
             print(f"최근 접속시간 업데이트 중 에러 발생: {e}")
             return None
+    def update_login_history(self, profile):
+        try:
+            login_history = LoginHistory.objects.create(account_id=profile.account.id)
+            return login_history
+        except Exception as e:
+            print(f"로그인 기록 생성 중 에러 발생: {e}")
+            return None
