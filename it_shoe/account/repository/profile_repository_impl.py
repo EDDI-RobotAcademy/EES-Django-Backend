@@ -83,7 +83,7 @@ class ProfileRepositoryImpl(ProfileRepository):
             print(f"로그인 기록 생성 중 에러 발생: {e}")
             return None
         
-    def withdraw_account(self, profile):
+    def withdrawAccount(self, profile):
         account = profile.account
         role_type = AccountRoleType.objects.get(id=account.roleType_id)
         if role_type.roleType == "NORMAL":

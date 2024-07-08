@@ -82,7 +82,7 @@ class AccountView(viewsets.ViewSet):
         email = profile.email
         return Response(email, status=status.HTTP_200_OK)
     
-    def withdraw_account(self, request):
+    def withdrawAccount(self, request):
         try:
             reason = request.data.get('reason')
             userToken = request.data.get('userToken')
@@ -93,7 +93,7 @@ class AccountView(viewsets.ViewSet):
             if profile is None:
                 return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
             email = profile.email
-            res = self.accountService.withdraw_account(email)
+            res = self.accountService.withdrawAccount(email)
             return Response(res, status=status.HTTP_200_OK)
         except Exception as e:
             print("회원 탈퇴 중 에러 발생:", e)
@@ -107,7 +107,7 @@ class AccountView(viewsets.ViewSet):
         profile = self.profileRepository.findById(accountId)
         if profile is None:
             return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)  # 에러 처리 추가
-        gender = profile.gender
+        gender = profile.gender_id
         return Response(gender, status=status.HTTP_200_OK)
 
     def getBirthyear(self, request):
