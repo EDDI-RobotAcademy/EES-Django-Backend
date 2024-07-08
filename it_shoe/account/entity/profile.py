@@ -1,12 +1,13 @@
 from django.db import models
 from django.utils import timezone
 from account.entity.account import Account
-from datetime import timedelta
+from account.entity.profile_gender_type import ProfileGenderType
+
 
 class Profile(models.Model):
     nickname = models.CharField(max_length=64, unique=True)
     email = models.CharField(max_length=64, unique=True)
-    gender = models.CharField(max_length=64)    # 성별 필드 추가
+    gender = models.ForeignKey(ProfileGenderType, on_delete=models.CASCADE)   # 성별 필드 추가
     birthyear = models.IntegerField()           # 생년월일 필드 추가
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)  # 최초 등록일자 필드 추가
