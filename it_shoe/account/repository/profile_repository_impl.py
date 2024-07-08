@@ -1,5 +1,7 @@
 from account.entity.profile import Profile
 from account.repository.profile_repository import ProfileRepository
+from account.entity.profile_gender_type import ProfileGenderType
+from account.entity.account_role_type import AccountRoleType
 
 from django.utils import timezone
 
@@ -42,6 +44,7 @@ class ProfileRepositoryImpl(ProfileRepository):
             return None
 
     def create(self, nickname, email, gender, birthyear, account):
+        gender = ProfileGenderType.objects.create(gender_type=gender)
         profile = Profile.objects.create(
             nickname=nickname,
             email=email,
