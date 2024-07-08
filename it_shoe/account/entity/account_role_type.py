@@ -2,7 +2,12 @@ from django.db import models
 
 
 class AccountRoleType(models.Model):
-    roleType = models.CharField(max_length=64)
+    class RoleType(models.TextChoices):
+        ADMIN = 'ADMIN'
+        NORMAL = 'NORMAL'
+        BLACKLIST = 'BLACKLIST'
+        
+    roleType = models.CharField(max_length=64, choices=RoleType.choices, default=RoleType.NORMAL)
 
     def __str__(self):
         return self.roleType
