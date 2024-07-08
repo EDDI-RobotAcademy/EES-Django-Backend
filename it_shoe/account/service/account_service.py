@@ -19,5 +19,5 @@ class AccountService(ABC):
         pass
     
     @abstractmethod
-    def withdraw_account(self, email):
+    def withdrawAccount(self, email):
         pass

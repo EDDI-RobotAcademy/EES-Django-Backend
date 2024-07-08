@@ -27,5 +27,5 @@ class ProfileRepository(ABC):
         pass
     
     @abstractmethod
-    def withdraw_account(self, profile):
+    def withdrawAccount(self, profile):
         pass
