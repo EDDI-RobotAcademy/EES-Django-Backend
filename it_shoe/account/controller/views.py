@@ -99,4 +99,16 @@ class AccountView(viewsets.ViewSet):
             return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)  # 에러 처리 추가
         email = profile.email
         return Response(email, status=status.HTTP_200_OK)
+    
+    def withdraw_account(self, request):
+        userToken = request.data.get('userToken')
+        if not userToken:
+            return Response(None, status=status.HTTP_200_OK)
+        accountId = self.redisService.getValueByKey(userToken)
+        profile = self.profileRepository.findById(accountId)
+        if profile is None:
+            return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)  # 에러 처리 추가
+        email = profile.email
+        res = self.accountService.withdraw_account(email)
+        return Response(res, status=status.HTTP_200_OK)
 
