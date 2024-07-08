@@ -103,11 +103,11 @@ class AccountView(viewsets.ViewSet):
         userToken = request.data.get('userToken')
         if not userToken:
             return Response(None, status=status.HTTP_200_OK)
-        accountId = self.redisService.getValueByKey(userToken)
-        profile = self.profileRepository.findById(accountId)
+        id = self.redisService.getValueByKey(userToken)
+        profile = self.profileRepository.findByGender(id)
         if profile is None:
             return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)  # 에러 처리 추가
-        gender = profile.gender
+        gender = profile.gender_type
         return Response(gender, status=status.HTTP_200_OK)
 
     def getBirthyear(self, request):
