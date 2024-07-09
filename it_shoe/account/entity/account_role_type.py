@@ -1,6 +1,5 @@
 from django.db import models
 
-from account.entity.role_type import RoleType
 
 
 class AccountRoleType(models.Model):
