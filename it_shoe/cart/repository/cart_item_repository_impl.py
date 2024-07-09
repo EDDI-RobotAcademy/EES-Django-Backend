@@ -47,5 +47,10 @@ class CartItemRepositoryImpl(CartItemRepository):
     def findAllByProductIdAndProductSize(self, productId, productSize):
         return CartItem.objects.filter(product_id=productId, productSize=productSize)
 
+    def deleteByCartItemId(self, cartItem_Id):
+        for cartItemId in cartItem_Id:
+            cartItem = CartItem.objects.get(cartItemId=cartItemId)
+            cartItem.delete()
+
     def update(self, cartItem):
         cartItem.save()

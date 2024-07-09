@@ -81,17 +81,9 @@ class CartServiceImpl(CartService):
 
         return cartItemListResponseForm
 
-    # def cartList(self, accountId):
-    #     return self.cartRepository.findByAccount(accountId)
+    def removeCartItem(self, cartItemId):
+        return self.__cartItemRepository.deleteByCartItemId(cartItemId)
 
-    # def cartList(self, accountId):
-    #     account = self.__accountRepository.findById(accountId)
-    #     print(f"cartList -> account:", account)
-    #     if account:
-    #         cart = self.__cartRepository.findByAccount(account)
-    #         print(f"cartList -> cart:", cart)
-    #         if cart:
-    #             return cart.items.all()
-    #     return []
+
 
 
