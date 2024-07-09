@@ -1,7 +1,6 @@
 from account.entity.account import Account
 from account.entity.account_login_type import AccountLoginType
 from account.entity.account_role_type import AccountRoleType
-from account.entity.login_history import LoginHistory
 from account.repository.account_repository import AccountRepository
 
 from django.utils import timezone
@@ -41,3 +40,18 @@ class AccountRepositoryImpl(AccountRepository):
         except Exception as e:
             print(f"최근 접속시간 업데이트 중 에러 발생: {e}")
             return None
+
+    def withdrawAccount(self, account, withdrawReason):
+        role_type = AccountRoleType.objects.get(id=account.roleType_id)
+
+        if role_type.roleType == "NORMAL":
+            role_type.roleType = "BLACKLIST"
+            role_type.save()
+
+            account.roleType = role_type
+            account.withdraw_reason = withdrawReason
+            account.withdraw_at = timezone.now()
+            account.save()
+            print('계정 탈퇴 완료')
+        else:
+            raise ValueError('이미 탈퇴된 계정입니다')
