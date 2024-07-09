@@ -19,7 +19,7 @@ class CartItemRepository(ABC):
         pass
 
     @abstractmethod
-    def findAllByProductId(self, productId):
+    def findAllByProductIdAndProductSize(self, productId, productSize):
         pass
 
     @abstractmethod
