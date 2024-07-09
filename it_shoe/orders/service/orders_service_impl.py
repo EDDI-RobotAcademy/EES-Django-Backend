@@ -39,7 +39,8 @@ class OrdersServiceImpl(OrdersService):
                     orders,
                     cartItem.product,
                     item['orderPrice'],
-                    item['quantity']
+                    item['quantity'],
+                    item['size']
                 )
 
             return orders.id
@@ -65,6 +66,7 @@ class OrdersServiceImpl(OrdersService):
             order_details = {
                 'order': {
                     'id': order.id,
+                    'size': order.size,
                     'status': order.status,
                     'created_date': order.created_date,
                     'total_price': totalPrice,
@@ -78,6 +80,7 @@ class OrdersServiceImpl(OrdersService):
                         'quantity': item.quantity,
                         'price': item.price,
                         'total_price': item.total_price(),
+                        'size': item.size,
                     }
                     for item in ordersItemList
                 ]
@@ -106,6 +109,7 @@ class OrdersServiceImpl(OrdersService):
             ordersList.append({
                 'orderId': order.id,
                 'orderName': orderName,
+                'orderSize': order.size,
                 'orderDate': order.created_date,
                 'ordersItemTotalPrice': totalPrice
             })

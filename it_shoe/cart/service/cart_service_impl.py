@@ -31,13 +31,16 @@ class CartServiceImpl(CartService):
         if cart is None:
             print("장바구니 새롭게 생성")
             cart = self.__cartRepository.register(account)
-
-        print("기존 장바구니 사용")
+        else:
+            print("기존 장바구니 사용")
 
         productId = cartData.get('productId')
         print(f"productId: {productId}")
 
-        cartItemList = self.__cartItemRepository.findAllByProductId(productId)
+        productSize = cartData.get('productSize')
+        print(f"productSize: {productSize}")
+
+        cartItemList = self.__cartItemRepository.findAllByProductIdAndProductSize(productId, productSize)
         print(f"cartItemList: {cartItemList}")
 
         cartItem = None
@@ -54,7 +57,6 @@ class CartServiceImpl(CartService):
             self.__cartItemRepository.register(cartData, cart, product)
         else:
             print("기존 상품 추가")
-
             cartItem.quantity += 1
             self.__cartItemRepository.update(cartItem)
 

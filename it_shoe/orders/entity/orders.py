@@ -7,6 +7,7 @@ from orders.entity.orders_status import OrderStatus
 
 class Orders(models.Model):
     id = models.AutoField(primary_key=True)
+    size = models.PositiveIntegerField(default=220)
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='orders')
     status = models.CharField(max_length=10, choices=OrderStatus.choices, default=OrderStatus.PENDING)
     created_date = models.DateTimeField(auto_now=True)
