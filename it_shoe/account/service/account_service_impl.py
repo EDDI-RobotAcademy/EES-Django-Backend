@@ -34,7 +34,6 @@ class AccountServiceImpl(AccountService):
         account = self.__accountRepository.create(loginType, roleType)
         return self.__profileRepository.create(nickname, email, gender, birthyear, account)
 
-
     def findAccountByEmail(self, email):
         profile = self.__profileRepository.findByEmail(email)
         if profile:
@@ -42,10 +41,10 @@ class AccountServiceImpl(AccountService):
             self.__profileRepository.update_login_history(profile)
         return profile
     
-    def withdrawAccount(self, email):
-        profile = self.__profileRepository.findByEmail(email)
+    def withdrawAccount(self, accountId, withdrawReason):
+        account = self.__accountRepository.findById(accountId)
         try:
-            self.__profileRepository.withdrawAccount(profile)
+            self.__accountRepository.withdrawAccount(account, withdrawReason)
             return True
         except Exception as e:
             print(f"withdraw_account error: {e}")

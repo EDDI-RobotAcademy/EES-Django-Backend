@@ -29,7 +29,3 @@ class ProfileRepository(ABC):
     @abstractmethod
     def findByGender(self, id):
         pass
-
-    @abstractmethod
-    def withdrawAccount(self, profile):
-        pass
